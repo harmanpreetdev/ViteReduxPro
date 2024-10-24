@@ -1,3 +1,4 @@
+import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import AppRoutes from "./routes/AppRoutes";
@@ -5,9 +6,11 @@ import AppRoutes from "./routes/AppRoutes";
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <AppRoutes />
-      </div>
+      <HelmetProvider>
+        <div className="App">
+          <AppRoutes />
+        </div>
+      </HelmetProvider>
     </Provider>
   );
 }

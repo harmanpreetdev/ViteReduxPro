@@ -1,4 +1,4 @@
-import api from "../../services/api";
+import api from "@/services/api";
 import { LoginPayload, User } from "./authTypes";
 
 export const login = async (payload: LoginPayload): Promise<User> => {

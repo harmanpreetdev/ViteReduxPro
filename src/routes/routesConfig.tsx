@@ -1,8 +1,9 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
-import MainLayout from "../layouts/MainLayout";
-import AuthLayout from "../layouts/AuthLayout";
+import MainLayout from "@/layouts/MainLayout";
+import AuthLayout from "@/layouts/AuthLayout";
+import ErrorBounday from "@/components/ErrorBoundary";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <AuthLayout />,
+    element: (
+      <ErrorBounday fallback={<p>Something went wrong!</p>}>
+        <AuthLayout />
+      </ErrorBounday>
+    ),
     children: [{ path: "login", element: <LoginPage /> }],
   },
   {
