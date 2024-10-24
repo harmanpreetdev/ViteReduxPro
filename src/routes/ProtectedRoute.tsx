@@ -1,6 +1,7 @@
-import { useSelector } from "react-redux";
-import { selectUser } from "../features/auth/authSelectors";
 import { ReactNode } from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { selectUser } from "../features/auth/authSelectors";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -9,7 +10,9 @@ interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const user = useSelector(selectUser);
 
-  
+  if (!user) {
+    return <Navigate to="/auth/login" />;
+  }
 
   return <>{children}</>;
 };

@@ -1,23 +1,15 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AuthLayout from "../layouts/AuthLayout";
-import LoginPage from "../pages/LoginPage";
-import MainLayout from "../layouts/MainLayout";
-import HomePage from "../pages/HomePage";
-import NotFoundPage from "../pages/NotFoundPage";
+import { lazy } from "react";
+import { RouterProvider } from "react-router-dom";
+import ErrorBounday from "../components/ErrorBoundary";
+import router from "./routesConfig";
+
+const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
 
 const AppRoutes = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-        <Route path="/auth" element={<AuthLayout />}>
-          <Route path="login" element={<LoginPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <ErrorBounday fallback={<NotFoundPage />}>
+      <RouterProvider router={router} />
+    </ErrorBounday>
   );
 };
 
