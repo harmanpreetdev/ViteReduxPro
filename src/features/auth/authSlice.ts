@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { login, logout } from "./authApi";
-import { AuthState, LoginPayload, User } from "./authTypes";
+import { authTypes } from "@/types";
 
-const initialState: AuthState = {
+const initialState: authTypes.AuthState = {
   user: null,
   loading: false,
   error: null,
@@ -10,7 +10,7 @@ const initialState: AuthState = {
 
 export const loginUser = createAsyncThunk(
   "auth/login",
-  async (payload: LoginPayload, { rejectWithValue }) => {
+  async (payload: authTypes.LoginPayload, { rejectWithValue }) => {
     try {
       const user = await login(payload);
       return user;
@@ -45,10 +45,13 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, (state, action: PayloadAction<User>) => {
-        state.loading = false;
-        state.user = action.payload;
-      })
+      .addCase(
+        loginUser.fulfilled,
+        (state, action: PayloadAction<authTypes.User>) => {
+          state.loading = false;
+          state.user = action.payload;
+        }
+      )
       .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = action.payload;

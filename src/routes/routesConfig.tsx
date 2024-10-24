@@ -1,13 +1,21 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import { MainLayout, AuthLayout } from "@/layouts";
+import { ErrorBounday } from "@/components";
 import ProtectedRoute from "./ProtectedRoute";
-import MainLayout from "@/layouts/MainLayout";
-import AuthLayout from "@/layouts/AuthLayout";
-import ErrorBounday from "@/components/ErrorBoundary";
 
-const HomePage = lazy(() => import("../pages/HomePage"));
-const LoginPage = lazy(() => import("../pages/LoginPage"));
-const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
+const HomePage = lazy(() =>
+  import("@/pages").then((module) => ({ default: module.HomePage }))
+);
+const RegisterPage = lazy(() =>
+  import("@/pages").then((module) => ({ default: module.RegisterPage }))
+);
+const LoginPage = lazy(() =>
+  import("@/pages").then((module) => ({ default: module.LoginPage }))
+);
+const NotFoundPage = lazy(() =>
+  import("@/pages").then((module) => ({ default: module.NotFoundPage }))
+);
 
 const router = createBrowserRouter([
   {
@@ -26,7 +34,10 @@ const router = createBrowserRouter([
         <AuthLayout />
       </ErrorBounday>
     ),
-    children: [{ path: "login", element: <LoginPage /> }],
+    children: [
+      { path: "register", element: <RegisterPage /> },
+      { path: "login", element: <LoginPage /> },
+    ],
   },
   {
     path: "*",

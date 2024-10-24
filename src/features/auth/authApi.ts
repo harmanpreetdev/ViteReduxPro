@@ -1,7 +1,9 @@
-import api from "@/services/api";
-import { LoginPayload, User } from "./authTypes";
+import { api } from "@/services";
+import { authTypes } from "@/types";
 
-export const login = async (payload: LoginPayload): Promise<User> => {
+export const login = async (
+  payload: authTypes.LoginPayload
+): Promise<authTypes.User> => {
   const { data } = await api.post("/auth/login", payload);
   return data;
 };

@@ -1,7 +1,7 @@
 import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
-import AppRoutes from "./routes/AppRoutes";
+import { store } from "@/app/store";
+import { AppRoutes } from "@/routes";
 
 function App() {
   return (

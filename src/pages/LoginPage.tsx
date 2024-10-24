@@ -1,4 +1,4 @@
-import HelmetMeta from "@/utils/HelmetMeta";
+import { HelmetMeta } from "@/utils";
 
 const LoginPage = () => {
   return (
