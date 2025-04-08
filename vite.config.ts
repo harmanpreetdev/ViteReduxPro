@@ -27,6 +27,9 @@ export default defineConfig(({ mode }) => {
         "@": path.resolve(__dirname, "src"),
       },
     },
+    server: {
+      port: 8080,
+    },
     define: {
       "process.env": {},
       "import.meta.env": env,
